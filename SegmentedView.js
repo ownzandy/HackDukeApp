@@ -2,9 +2,9 @@
 'use strict';
 var React = require('react-native');
 var screen = require('Dimensions').get('window');
-var Tab4 = require('./hacker.js');
-var Tab5 = require('./educator.js');
-var Tab6 = require('./stream.js');
+var Hacker = require('./hacker.js');
+var Educator = require('./educator.js');
+var Stream = require('./stream.js');
 var currView;
 
 var {
@@ -505,15 +505,6 @@ var SegmentedView = React.createClass({
     },
 
     getInitialState() {
-        if(this.props.index === 0) {
-          currView = <Tab4 />;
-        }
-        else if (this.props.index === 1){
-          currView = <Tab5 />;
-        }
-        else {
-          currView = <Tab6 />;
-        }
         return {
             barLeft: 0,
             barRight: screen.width,
@@ -585,13 +576,13 @@ var SegmentedView = React.createClass({
         }
 
         if(this.props.index === 0) {
-          currView = <Tab6 />;
+          currView = <Stream />;
         }
         else if (this.props.index === 1){
-          currView = <Tab4 />;
+          currView = <Hacker />;
         }
         else {
-          currView = <Tab5 />;
+          currView = <Educator/>;
         }
 
         return (

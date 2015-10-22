@@ -23,10 +23,10 @@ var schedule = React.createClass({
   getInitialState() {
     return {index: 0}
   },
+  
 
   render() {
     return (
-
       <View style={styles.container}>
          <SegmentedView
           titles={["Stream", "Hacker", "Educator"]}
@@ -34,8 +34,7 @@ var schedule = React.createClass({
           stretch
           onPress={index => this.setState({ index })} />
         </View>
-    
-    )
+      ) 
   }
 });
 

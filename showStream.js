@@ -14,70 +14,42 @@ var {
   Text,
   Component,
   ListView,
-  ScrollView,
-  ActivityIndicatorIOS
+  ScrollView
 } = React;
 
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+var headerSeparate = function(s) {
+    return s.split('*');
+}
 
 var more4 = React.createClass({
 
   mixins: [ParseReact.Mixin],
 
-  observe: function(props, state) {
-    var eventsQuery = (new Parse.Query('eventstream')).descending('createdAt');
-    var initialQuery = (new Parse.Query('eventstream')).descending('createdAt');
-      if (state.isLoading) {
-        return {
-          events: eventsQuery
-        }
-      }
-      else {
-        return {
-          initialEvents: initialQuery
-        }
-      }
+  observe: function() {
+  return {
+    user: ParseReact.currentUser,
+    events: (new Parse.Query('eventstream')).descending('createdAt')
+   };
   },
 
 getInitialState: function () {
   return {
-    dataSource: ds,
+    dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+    reload: 0
   };
 },
 
-_executeQuery: function() {
-  this.setState({ isLoading: true });
-},
-
-componentDidUpdate: function(prevProps, prevState) {
-  if (prevState.isLoading && (this.pendingQueries().length == 0)) {
-    this.setState({ isLoading: false });
-    this.refreshQueries();
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(this.data.events)})
-  }
-},
-
 getDataSource: function() {
-  if (this.data.events == null) {
-      return this.state.dataSource.cloneWithRows(this.data.initialEvents)
-  }
-  else {
-     return this.state.dataSource
-  }
+  var num = this.state.dataSource.cloneWithRows(this.data.events)
+  return num;
 },
+
 
   render: function() {
-
     return (
-      <ScrollView automaticallyAdjustContentInsets={false}
-      contentInset={{bottom: 50}}>
-       <View style={styles.section}>
-          <Text style={styles.dateText}
-                onPress={this._executeQuery}> 
-                Double Tap to Refresh </Text>
-          </View>
+      <ScrollView>
          <ListView
-          dataSource={this.getDataSource()}
+          dataSource={this.state.dataSource.cloneWithRows(this.data.events)}
           renderRow={this.renderPostCell}
           automaticallyAdjustContentInsets={false}
           renderSeparator={this.renderSeparator}
@@ -126,7 +98,7 @@ var styles = StyleSheet.create({
   },
   section: {
     alignItems: 'center',
-    backgroundColor: '#F0F0F0'
+    backgroundColor: '#F0F0F0',
   },
   sectionText: {
     fontSize: 20,
@@ -188,10 +160,10 @@ var styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
   },
   dateText: {
-    fontSize: 21,
+    fontSize: 20,
     color: '#54728C',
-    paddingTop: 18,
-    paddingBottom: 17,
+    paddingTop: 10,
+    paddingBottom: 5,
     fontWeight: 'bold'
   },
   refreshText: {

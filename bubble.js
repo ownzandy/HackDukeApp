@@ -39,10 +39,6 @@ class more2 extends Component {
           {'Open'}
         </Text>
       </View>
-        <View style={styles.chevron}>
-            <Image source={require('image!chevron')}
-                    style={styles.chevronImage}/>
-        </View>
         <View style={styles.header}>
             <Text style={styles.headerText}> Bubble </Text>  
         </View> 
@@ -90,7 +86,7 @@ var styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    height: Screen.height-120,
+    height: Screen.height,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#2a3139',

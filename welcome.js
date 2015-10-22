@@ -4,8 +4,8 @@ var React = require('react-native');
 var Screen = require('Dimensions').get('window');
 var ProgressBar = require('./ProgressBar.js');
 
-var startTime = 1445154740000;
-var endTime =  1445154860000;
+var startTime =  1446912000000;
+var endTime =  1447012800000;
 var totalTime = endTime - startTime;
 
 var eventProgress = function() {
@@ -79,7 +79,8 @@ var {
   Text,
   Component,
   Image,
-  ScrollView
+  ScrollView,
+  PushNotificationIOS
 } = React;
  
 var more2 = React.createClass({
@@ -90,7 +91,38 @@ var more2 = React.createClass({
       };
      },
 
-     render() {
+     findChevronStyle: function() {
+        if (Screen.height == 736) {
+            return styles.chevron6Plus;
+        }
+        if (Screen.height == 667) {
+            return styles.chevron6;
+        }
+        if (Screen.height == 568) {
+            return styles.chevron5;
+        }
+        if (Screen.height == 480) {
+            return styles.chevron4;
+        }
+     },
+
+     findLogoContainerStyle: function() {
+            if (Screen.height == 736) {
+            return styles.logoContainer6Plus;
+        }
+        if (Screen.height == 667) {
+            return styles.logoContainer6;
+        }
+        if (Screen.height == 568) {
+            return styles.logoContainer5;
+        }
+        if (Screen.height == 480) {
+            return styles.logoContainer4;
+        }
+     },
+
+     render: function() {
+
       setTimeout((function() {
         this.setState({});
       }).bind(this), 1000);
@@ -102,7 +134,7 @@ var more2 = React.createClass({
         alignItems={'stretch'}
         justifyContent={'flex-start'}
         style={styles.scrollView}>
-        <View> 
+        <View style={this.findLogoContainerStyle()}> 
             <Image source={require('image!logo')} 
                style={styles.logo}
                resizeMode={Image.resizeMode.contain} /> 
@@ -115,7 +147,7 @@ var more2 = React.createClass({
             progress={eventProgress()}/>
             <Text style={styles.timeText}> {calculateTime(1)} </Text>
         </View>
-        <View style={styles.chevron}>
+        <View style={this.findChevronStyle()}>
             <Image source={require('image!chevron')}
                     style={styles.chevronImage}/>
         </View>
@@ -134,13 +166,42 @@ var more2 = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  logoContainer6Plus: {
+      height: Screen.height-200-5*Screen.height/100,
+  },
+  chevron6Plus: {
+      alignItems: 'center',
+      paddingTop: 1/11*(Screen.height-200),
+      paddingBottom: 10,
+  },
+  logoContainer6: {
+      height: Screen.height-190-5*Screen.height/100,
+  },
+  chevron6: {
+      alignItems: 'center',
+      paddingTop: 1/13*(Screen.height-200),
+      paddingBottom: 10,
+  },
+  logoContainer5: {
+      height: Screen.height-185-5*Screen.height/100,
+  },
+  chevron5: {
+      alignItems: 'center',
+      paddingTop: 1/15*(Screen.height-200),
+      paddingBottom: 10,
+  },
+  logoContainer4: {
+      height: Screen.height-177-5*Screen.height/100,
+  },
+  chevron4: {
+      alignItems: 'center',
+      paddingTop: 1/20*(Screen.height-200),
+      paddingBottom: 10,
+  },
+
   chevronImage: {
       width: 40,
       height: 40,
-  },
-  chevron: {
-      alignItems: 'center',
-      padding: 5
   },
   labelText: {
       fontFamily: 'optima',
@@ -148,14 +209,13 @@ var styles = StyleSheet.create({
       fontSize: 20
   },
   timeText: {
+      paddingTop: 10,
       fontFamily: 'optima',
       color: '#FFFFFF',
       fontSize: 20,
-      padding: 10
   },
   progress: {
     alignItems: 'center',
-    height: 80
   },
   scrollView: {
     width: Screen.width,
@@ -165,7 +225,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFFFFF'
   },
   logo: {
-      height: Screen.height-200,
+      height: Screen.height-150,
       width: Screen.width,
   },
   sponsors: {
@@ -182,9 +242,6 @@ var styles = StyleSheet.create({
     fontSize: 25,
     color: '#FFFFFF',
   },
-  resizeMode: {
-    height: 200
-  }
 });
  
 module.exports = more2;

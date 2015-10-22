@@ -4,10 +4,11 @@
  */
 'use strict';
 var React = require('react-native');
-var Schedule = require('./schedule.js');
+var Schedule = require('./schedule2.js');
 var FAQ = require('./faq.js');
 var Welcome = require('./welcome.js');
 var Bubble = require('./bubble.js');
+var Stream = require('./stream.js');
 
 var {
   AppRegistry,
@@ -16,10 +17,29 @@ var {
   View,
   Image,
   TabBarIOS,
-  Component
+  AlertIOS,
+  Component,
+  PushNotificationIOS,
+  StatusBarIOS
 } = React;
 
+var registerInstallation = function(data) {
+    var url = "https://api.parse.com";
+    url += "/1/installations";
+    fetch(url, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'X-Parse-Application-Id': 'gApTA0nc0OCYp0Bn23tgvTCo6Bdk84vPBpKm9CDu',
+            'X-Parse-REST-API-Key': 'Mryxq1sCUalshlJWryOHPb8p9IYiFg2QecoxUZBP',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+};
+
 var HackDukeApp = React.createClass({
+
 
   getInitialState: function() {
     return {
@@ -27,7 +47,21 @@ var HackDukeApp = React.createClass({
     };
   },
 
+  componentWillMount: function() {
+    PushNotificationIOS.addEventListener('register', function(token){
+        registerInstallation({
+        "deviceType": "ios",
+         "deviceToken": token,
+        "channels": ["global"]
+        })
+    });
+    StatusBarIOS.setStyle(1);
+  },
+
   render: function() {
+
+    PushNotificationIOS.requestPermissions();
+
      return (
       <TabBarIOS 
         tintColor="#54728C"

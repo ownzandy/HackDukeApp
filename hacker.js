@@ -6,7 +6,8 @@ var {
   View,
   Text,
   Component,
-  ListView
+  ListView,
+  ScrollView
 } = React;
 
 var headerSeparate = function(s) {
@@ -41,6 +42,7 @@ var more4 = React.createClass({
     return (
       <ListView
         dataSource={this.state.dataSource}
+        contentInset={{bottom: 50}}
         automaticallyAdjustContentInsets={false}
         renderRow={this.renderPostCell}
         zoomScale={5}
