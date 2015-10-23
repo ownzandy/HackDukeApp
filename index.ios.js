@@ -79,7 +79,7 @@ var HackDukeApp = React.createClass({
             <Welcome/>
         </TabBarIOS.Item>
         <TabBarIOS.Item 
-          title={'Schedule'}
+          title={'Events'}
           selected={this.state.selectedTab === 'schedule'}
           icon = {require('image!calendar')}
           onPress={() => {

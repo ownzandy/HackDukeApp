@@ -3,10 +3,13 @@
 var React = require('react-native');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react/react-native');
+var Screen = require('Dimensions').get('window');
 Parse.initialize(
   'gApTA0nc0OCYp0Bn23tgvTCo6Bdk84vPBpKm9CDu',
   'x6rYbWbGVCTmL3rQZ2nvZNcfHhIc09xKNgUnL8Nm'
 );
+
+var beginningUpdates = 0;
 
 var {
   StyleSheet,
@@ -15,7 +18,8 @@ var {
   Component,
   ListView,
   ScrollView,
-  ActivityIndicatorIOS
+  ActivityIndicatorIOS,
+  AlertIOS
 } = React;
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -42,6 +46,7 @@ var more4 = React.createClass({
 getInitialState: function () {
   return {
     dataSource: ds,
+    isLoading: false
   };
 },
 
@@ -53,6 +58,9 @@ componentDidUpdate: function(prevProps, prevState) {
   if (prevState.isLoading && (this.pendingQueries().length == 0)) {
     this.setState({ isLoading: false });
     this.refreshQueries();
+    beginningUpdates++;
+     if (beginningUpdates % 2 == 0) {
+     }
     this.setState({dataSource: this.state.dataSource.cloneWithRows(this.data.events)})
   }
 },
@@ -68,9 +76,10 @@ getDataSource: function() {
 
   render: function() {
 
-    return (
-      <ScrollView automaticallyAdjustContentInsets={false}
-      contentInset={{bottom: 50}}>
+    if(!this.state.isLoading) {
+      return (
+       <ScrollView automaticallyAdjustContentInsets={false}
+        contentInset={{bottom: 50}}>
        <View style={styles.section}>
           <Text style={styles.dateText}
                 onPress={this._executeQuery}> 
@@ -82,8 +91,31 @@ getDataSource: function() {
           automaticallyAdjustContentInsets={false}
           renderSeparator={this.renderSeparator}
           style={styles.postsListView} />
-      </ScrollView>
+        </ScrollView>
       )
+    }
+    else {
+      return (
+      <ScrollView automaticallyAdjustContentInsets={false}
+        contentInset={{bottom: 50}}>
+      <ActivityIndicatorIOS
+        animating={this.state.animating}
+        style={styles.centering}
+        size="large"/>
+       <View style={styles.section}>
+          <Text style={styles.dateText}
+                onPress={this._executeQuery}> 
+                Double Tap to Refresh </Text>
+          </View>
+         <ListView
+          dataSource={this.getDataSource()}
+          renderRow={this.renderPostCell}
+          automaticallyAdjustContentInsets={false}
+          renderSeparator={this.renderSeparator}
+          style={styles.postsListView} />
+        </ScrollView>
+        )
+    }
   },
   
     renderPostCell: function(rowData) {
@@ -205,7 +237,15 @@ var styles = StyleSheet.create({
     color: '#8DA7BE',
     fontWeight: 'bold',
     paddingBottom: 5,
-  }
+  },
+  centering: {
+    paddingTop: 20,
+    height: 50,
+    borderLeftWidth: Screen.width*1/2,
+    borderRightWidth: Screen.width*1/2,
+    borderColor: '#F0F0F0',
+    backgroundColor: '#F0F0F0' 
+  },
 });
 
  

@@ -6,7 +6,6 @@
 var React = require('react-native');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Hacker = require('./hacker.js');
-var Educator = require('./educator.js');
 var Stream = require('./stream.js');
 
 var {
@@ -25,8 +24,7 @@ var schedule = React.createClass({
   render() {
     return (
       <ScrollableTabView>
-        <Hacker tabLabel="Hacker" />
-        <Educator tabLabel="Educator" />
+        <Hacker tabLabel="Schedule" />
         <Stream tabLabel="Stream" />
       </ScrollableTabView>
     );
