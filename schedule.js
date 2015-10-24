@@ -40,6 +40,7 @@ var schedule = React.createClass({
 
 var styles = StyleSheet.create({
 container: {
+    borderWidthTop: 10,
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#2a3139',

@@ -94,7 +94,7 @@ var styles = StyleSheet.create({
     padding: 10,
     borderLeftWidth: 5,
     borderRightWidth: 5,
-    shadowOpacity: 1,
+    borderTopWidth: 2,
     borderColor: '#2a3139'
   },
   headerText: {

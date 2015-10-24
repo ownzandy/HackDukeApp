@@ -3,13 +3,11 @@
 var React = require('react-native');
 var Screen = require('Dimensions').get('window');
 var Browser = require('react-native-browser');
-var React = require('react-native');
-var Parse = require('parse/react-native');
-var ParseReact = require('parse-react/react-native');
-Parse.initialize(
-  'gApTA0nc0OCYp0Bn23tgvTCo6Bdk84vPBpKm9CDu',
-  'x6rYbWbGVCTmL3rQZ2nvZNcfHhIc09xKNgUnL8Nm'
-);
+var WebIntent = require('react-native-webintent');
+
+var openBubble = function() {
+  WebIntent.open('https://bubble12.herokuapp.com')
+}
 
 var {
   StyleSheet,
@@ -18,41 +16,11 @@ var {
   Component,
   Image,
   ScrollView,
-  TextInput,
-  TouchableOpacity,
-  StatusBarIOS
+  TextInput
 } = React;
  
-var submitText;
-
-var more2 = React.createClass({
-
-    openBubble: function() {
-        Browser.open('http://bubble12.herokuapp.com/', {
-                    showUrlWhileLoading: true,
-                    navigationButtonsHidden: false,
-                    showActionButton: true,
-                    showDoneButton: true,
-                    doneButtonTitle: 'Done',
-                    showPageTitles: true,
-                    disableContextualPopupMenu: false,
-                    hideWebViewBoundaries: false
-                    })
-    },
-
-    updateSubmitText: function(event) {
-      submitText = event.nativeEvent.text;
-    },
-
-    clearText: function() {
-      if (submitText != '') {
-        ParseReact.Mutation.Create('bubble', {email : submitText}).dispatch();
-     }
-      this._textInput.setNativeProps({text: ''})
-      submitText = '';
-    },
-
-  render: function() {
+class more2 extends Component {
+  render() {
     return (
       <ScrollView
         automaticallyAdjustContentInsets={true}
@@ -70,7 +38,7 @@ var more2 = React.createClass({
           </Text>
         </View>
         <Image 
-          source={require('image!TransMap')} 
+          source={require('image!transmap')} 
           resizeMode={Image.resizeMode.stretch}
           style={styles.resizeTransMap}/>
         <Text style={styles.belowMapText}>
@@ -80,9 +48,9 @@ var more2 = React.createClass({
           Run into a bubble to get its message!
         </Text>
         <Text
-          onPress={() => this.openBubble()}
+          onPress={() => openBubble()}
           style={styles.description}>
-          {'Start   '}
+          {'Start'}
         </Text>
       </View>
       <View style={styles.downIcon}>
@@ -101,28 +69,10 @@ var more2 = React.createClass({
                 a new way to message.
               </Text>
             </View>
-            <View style={styles.bubble}>
-                    <TextInput ref={component => this._textInput = component}
-                    style={styles.textInput} autoCorrect={false}  autoCapitalize={'none'} 
-                    onChange={(event) => this.updateSubmitText(event)}/>
-                <View style={styles.textInputLine}>
-                </View>
-                <TouchableOpacity onPress={this.clearText}>
-                        <Text style={styles.clearText}> Click to submit </Text>
-                </TouchableOpacity>
-            </View>
             <Image 
               source={require('image!map')}
               style={styles.resizeMap}
               resizeMode={Image.resizeMode.stretch}/>
-              <View style={styles.textUnderMapContainer}>
-                <Text style={styles.textBelow}>
-                  {'We\'re launching soon!'}
-                </Text>   
-                <Text style={styles.textBelowMap}>
-                  get notified when it goes down
-                </Text>    
-              </View>
             <View style={styles.mapContainer}>
               <View style={styles.textMapContainer}>
                 <Text style={styles.textBelowMap}>
@@ -132,16 +82,27 @@ var more2 = React.createClass({
                   send it floating off for anyone to pick up
                 </Text> 
                 <Text style={styles.textBelowMap}>
+                  (aka sending a bubble)
+                </Text>
+                <Text style={styles.textBelowMap}>
                   discover bubbles by running into them 
                 </Text>   
+                <Text style={styles.textBelow}>
+                  We're launching soon!
+                </Text>   
+                <Text style={styles.textBelowMap}>
+                  get notified when it goes down
+                </Text> 
               </View>
             </View> 
-        </View>                                                             
+        </View> 
+        <View style={styles.bubble}>
+            <Text style={styles.bubbleText}> </Text>
+         </View>                                                                    
       </ScrollView>
     );
   }
-});
-
+}
 
 var styles = StyleSheet.create({
   chevronImage: {
@@ -157,13 +118,10 @@ var styles = StyleSheet.create({
     backgroundColor: '#2a3139',
   },
   bubble: {
-    paddingTop: 20*Screen.height/667,
-    paddingBottom: 10*Screen.height/667,
     backgroundColor: '#03a9f4',
-    alignItems: 'center'
+    height: Screen.height/667*30
   },
   header: {
-    height: Screen.height-49,
     alignItems: 'center',
     backgroundColor: '#03a9f4',
     padding: 10,
@@ -182,10 +140,10 @@ var styles = StyleSheet.create({
     fontFamily: 'optima',
     color: '#FFFFFF',
     borderColor: '#FFFFFF',
-    borderWidth: 2,
+    borderWidth: 2.5,
     paddingLeft: 50,
     paddingRight: 50,
-    paddingTop: Screen.height/667*10,
+    paddingTop: Screen.height/667*5,
     paddingBottom: Screen.height/667*5,
   },
   container: {
@@ -236,8 +194,8 @@ var styles = StyleSheet.create({
   },
   bigUnderText: {
     fontSize: Screen.height*1/35,
-    paddingTop: 10*Screen.height/667,
-    paddingBottom: 10*Screen.height/667,
+    paddingTop: 20*Screen.height/667,
+    paddingBottom: 5*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
     fontFamily: 'optima',
@@ -253,11 +211,13 @@ var styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
   },
   mapContainer: {
+    paddingTop: 30*Screen.height/667,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#03a9f4',
   },
   textContainer: {
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#03a9f4',
@@ -266,10 +226,8 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     backgroundColor: '#03a9f4',
-    paddingBottom: Screen.height/667*30
   },
   textBelowLogo: {
-    paddingTop: 10*Screen.height/667,
     fontSize: 30*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
@@ -277,7 +235,7 @@ var styles = StyleSheet.create({
   },
   textBelow: {
     fontSize: 28*Screen.height/667,
-    marginTop: 10*Screen.height/667,
+    marginTop: 30*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
     fontFamily: 'optima',
@@ -290,8 +248,8 @@ var styles = StyleSheet.create({
     fontFamily: 'optima',
   },
   resizeMap: {
-    width: 225*Screen.height/667,
-    height: 150*Screen.height/667,
+    width: 310*Screen.height/667,
+    height: 200*Screen.height/667,
   },
   resizeLogo: {
     width: 145*Screen.height/667,
@@ -303,26 +261,6 @@ var styles = StyleSheet.create({
   resizeTransMap: {
     height: 323*Screen.height/667,
     width: 200*Screen.height/667
-  },
-   textInput: {
-      height: Screen.height/667*25, 
-      width: Screen.width/350*200, 
-      color: '#FFFFFF',
-      fontFamily: 'Optima',
-      textAlign: 'auto'
-   },
-   textInputLine: {
-    height: 1,
-    width: Screen.width*2/3,
-    backgroundColor: '#FFFFFF',
-  },
-  clearText: {
-     color: '#FFFFFF',
-     fontFamily: 'Optima'
-  },
-  textUnderMapContainer: {
-    alignItems: 'center',
-    paddingBottom: Screen.height/667*30
   }
 });
  

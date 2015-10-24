@@ -55,7 +55,7 @@ var calculateTime = function(s) {
         else if (currTime > startTime && currTime < endTime) {
               if (s == 0) {
                 if (endTime - currTime < 3600*1000) {
-                    return 'Start submitting!'
+                    return 'Start submitting your projects!'
                 }
                 return 'Time Remaining'
               }
@@ -188,8 +188,8 @@ var styles = StyleSheet.create({
     backgroundColor: '#FFFFFF'
   },
   logo: {
-      height: 4/10*(Screen.height),
-      width: 4/10*8/10*(Screen.height),
+      height: 4/10*Screen.height,
+      width: 4/10*8/10*Screen.height,
   },
   sponsors: {
     width: Screen.width,
@@ -206,5 +206,5 @@ var styles = StyleSheet.create({
     color: '#FFFFFF',
   },
 });
-
+ 
 module.exports = more2;

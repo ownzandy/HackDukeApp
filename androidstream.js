@@ -80,7 +80,6 @@ getDataSource: function() {
       <ScrollView automaticallyAdjustContentInsets={false}
         contentInset={{bottom: 50}}
         style={{color: '#FFFFFF'}}>
-        <ProgressBar styleAttr="Inverse" />
        <View style={styles.section}>
           <Text style={styles.dateText}
                 onPress={this._executeQuery}> 

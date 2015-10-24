@@ -3,50 +3,41 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-
 var React = require('react-native');
+var ScrollableTabView = require('./android-tab-view.js');
+var Welcome = require('./androidwelcome.js');
+var FAQ = require('./androidfaq.js');
+var Schedule = require('./androidschedule.js')
+var Bubble = require('./androidbubble.js')
+var StatusBarAndroid = require('react-native-android-statusbar');
+
 var {
   AppRegistry,
   StyleSheet,
   Text,
   View,
+  Component,
+  Image,
+  TouchableHighlight,
+  PropTypes,
+  ScrollView
 } = React;
 
 var HackDukeApp = React.createClass({
-  render: function() {
+  render() {
+    StatusBarAndroid.setHexColor('#2a3139'); 
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <ScrollableTabView edgeHitWidth={0}>
+        <Welcome tabLabel="home" />
+        <Schedule tabLabel="calendar" />
+        <FAQ tabLabel="infowithcircle" />
+        <Bubble tabLabel="location" />
+      </ScrollableTabView>
     );
   }
 });
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });
 
 AppRegistry.registerComponent('HackDukeApp', () => HackDukeApp);
