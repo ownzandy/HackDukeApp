@@ -85,7 +85,7 @@ var styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '300',
     marginBottom: 20,
-    fontFamily: "Optima",
+    fontFamily: "futura",
     alignItems: 'center',
     color: '#FFFFFF'
   },
@@ -98,7 +98,7 @@ var styles = StyleSheet.create({
     borderColor: '#2a3139'
   },
   headerText: {
-    fontFamily: "Optima",
+    fontFamily: "futura",
     textAlign: 'center',
     fontSize: 18,
     color: '#FFFFFF',
@@ -107,7 +107,7 @@ var styles = StyleSheet.create({
     borderLeftWidth: 5,
     borderRightWidth: 5,
     borderColor: '#2a3139',
-    fontFamily: "Optima",
+    fontFamily: "futura",
     flex: 1,
     padding: 20,
     backgroundColor: '#8DA7BE',

@@ -43,11 +43,10 @@ getInitialState: function () {
 
 componentDidUpdate: function(prevProps, prevState) {
   beginningUpdates++
-  console.log(beginningUpdates);
     if (this.pendingQueries().length == 0) {
       setTimeout((function() {
         this.refreshQueries()
-      }).bind(this), 30000);
+      }).bind(this), 60000);
     }
 },
 

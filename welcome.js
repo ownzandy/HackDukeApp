@@ -4,8 +4,8 @@ var React = require('react-native');
 var Screen = require('Dimensions').get('window');
 var ProgressBar = require('./ProgressBar.js');
 
-var startTime =  1446912000000;
-var endTime =  1447012800000;
+var startTime =  1446921000000;
+var endTime =  1447002000000;
 var totalTime = endTime - startTime;
 
 var eventProgress = function() {
@@ -166,13 +166,13 @@ var styles = StyleSheet.create({
       height: 40,
   },
   labelText: {
-      fontFamily: 'optima',
+      fontFamily: 'futura',
       color: '#FFFFFF',
       fontSize: 10*Screen.height/320
   },
   timeText: {
       paddingTop: 10,
-      fontFamily: 'optima',
+      fontFamily: 'futura',
       color: '#FFFFFF',
       fontSize: 10*Screen.height/320,
   },
@@ -200,7 +200,7 @@ var styles = StyleSheet.create({
     borderColor: '#2a3139'
   },
   headerText: {
-    fontFamily: "Optima",
+    fontFamily: "futura",
     textAlign: 'center',
     fontSize: 25,
     color: '#FFFFFF',

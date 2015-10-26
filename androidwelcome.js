@@ -166,13 +166,13 @@ var styles = StyleSheet.create({
       height: 40,
   },
   labelText: {
-      fontFamily: 'optima',
+      fontFamily: 'futura',
       color: '#FFFFFF',
       fontSize: 10*Screen.height/320
   },
   timeText: {
       paddingTop: 10,
-      fontFamily: 'optima',
+      fontFamily: 'futura',
       color: '#FFFFFF',
       fontSize: 10*Screen.height/320,
   },
@@ -200,7 +200,7 @@ var styles = StyleSheet.create({
     borderColor: '#2a3139'
   },
   headerText: {
-    fontFamily: "Optima",
+    fontFamily: "futura",
     textAlign: 'center',
     fontSize: 25,
     color: '#FFFFFF',

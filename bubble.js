@@ -108,7 +108,7 @@ var more2 = React.createClass({
                 <View style={styles.textInputLine}>
                 </View>
                 <TouchableOpacity onPress={this.clearText}>
-                        <Text style={styles.clearText}> Click to submit </Text>
+                        <Text style={styles.clearText}> Click to submit your email </Text>
                 </TouchableOpacity>
             </View>
             <Image 
@@ -170,7 +170,7 @@ var styles = StyleSheet.create({
     borderColor: '#2a3139'
   },
   headerText: {
-    fontFamily: "Optima",
+    fontFamily: "avenir",
     textAlign: 'center',
     fontSize: 25,
     color: '#FFFFFF',
@@ -179,7 +179,7 @@ var styles = StyleSheet.create({
     fontSize: Screen.height*1/25,
     marginTop: Screen.height*1/90,
     textAlign: 'center',
-    fontFamily: 'optima',
+    fontFamily: 'futura',
     color: '#FFFFFF',
     borderColor: '#FFFFFF',
     borderWidth: 2,
@@ -212,27 +212,27 @@ var styles = StyleSheet.create({
     fontSize: 30*Screen.height*1/667,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'optima',
+    fontFamily: 'futura',
   },
   smallText: {
     fontSize: Screen.height*1/35,
     textAlign: 'center',
     color: '#FFFFFF',
     marginLeft: 50*Screen.width/375,
-    fontFamily: 'optima',
+    fontFamily: 'futura',
   },
   smallCenterText: {
     fontSize: Screen.height*1/35,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'optima',
+    fontFamily: 'avenir',
   },
   belowMapText: {
     fontSize: Screen.height*1/35,
     textAlign: 'center',
     color: '#FFFFFF',
     marginLeft: Screen.width*100/375,
-    fontFamily: 'optima',
+    fontFamily: 'futura',
   },
   bigUnderText: {
     fontSize: Screen.height*1/35,
@@ -240,7 +240,7 @@ var styles = StyleSheet.create({
     paddingBottom: 10*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'optima',
+    fontFamily: 'futura',
   },
   resizeMode: {
     width: Screen.height*275/667,
@@ -273,21 +273,21 @@ var styles = StyleSheet.create({
     fontSize: 30*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'optima',
+    fontFamily: 'avenir',
   },
   textBelow: {
     fontSize: 28*Screen.height/667,
     marginTop: 10*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'optima',
+    fontFamily: 'avenir',
   },
   textBelowMap: {
     flex: 1,
     fontSize: 18*Screen.height/667,
     textAlign: 'left',
     color: '#FFFFFF',
-    fontFamily: 'optima',
+    fontFamily: 'avenir',
   },
   resizeMap: {
     width: 225*Screen.height/667,
@@ -308,7 +308,7 @@ var styles = StyleSheet.create({
       height: Screen.height/667*25, 
       width: Screen.width/350*200, 
       color: '#FFFFFF',
-      fontFamily: 'Optima',
+      fontFamily: 'avenir',
       textAlign: 'auto'
    },
    textInputLine: {
@@ -318,7 +318,7 @@ var styles = StyleSheet.create({
   },
   clearText: {
      color: '#FFFFFF',
-     fontFamily: 'Optima'
+     fontFamily: 'avenir'
   },
   textUnderMapContainer: {
     alignItems: 'center',

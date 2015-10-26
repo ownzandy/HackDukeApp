@@ -500,7 +500,7 @@ var SegmentedView = React.createClass({
             stretch: false,
             selectedTextStyle: null,
             textStyle: null,
-            titleStyle: {color: '#FFFFFF', fontFamily: 'Optima', fontSize: 15},
+            titleStyle: {color: '#FFFFFF', fontFamily: 'futura', fontSize: 15},
         };
     },
 
