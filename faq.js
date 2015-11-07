@@ -14,20 +14,24 @@ var {
 
 var CONTENT = [
   {
-    title: 'Where will HackDuke take place?',
-    content: 'The Fitzpatrick Center for Interdisciplinary Engineering, Medicine and Applied Sciences:                                                                              101 Science Drive Durham, NC 27708',
-  },
-  {
-    title: 'Where will parking be available?',
-    content: 'Participants, mentors, and sponsors can park in the PG4/Bryan Center lot ($5 fee, cash only).',
+    title: 'Where\'s HackDuke?',
+    content:'We\'re located in the Duke University Engineering Quad, including the Teer, Hudson, and FCIEMAS buildings. Check out the location tab once you\'ve arrived!',
   },
   {
     title: 'What should I do when I arrive?',
-    content: 'IPSUM LOREM',
+    content: 'You can park in the Bryan Center parking garage and head over to the first floor entrance of FCIEMAS to check-in! You can find directions on our website if you\'re lost.',
   },
   {
     title: 'How can I get help?',
-    content: 'IPSUM LOREM',
+    content: 'If you\'re new, come to Schiciano behind the check-in/food area. Other technical mentors will be located at the bottom of the master staircase. Volunteers will also be running around in HackDuke sweaters.',
+  },
+  {
+    title: 'Where can I check out hardware?',
+    content: 'Hardware will be located at Twinnie\'s, across from the check-in/food area.',
+  },
+   {
+    title: 'Where can I sleep?',
+    content: 'Nap rooms will be available in the Hudson building.',
   },
 ];
  
@@ -82,7 +86,7 @@ var styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: '300',
     marginBottom: 20,
     fontFamily: "futura",

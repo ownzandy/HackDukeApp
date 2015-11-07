@@ -3,9 +3,11 @@
 var React = require('react-native');
 var Screen = require('Dimensions').get('window');
 var ProgressBar = require('./ProgressBar.js');
+var message= require('./RCTRealtimeMessagingAndroid.js');
+var RCTRealtimeMessaging = new message();
 
-var startTime =  1446912000000;
-var endTime =  1447012800000;
+var startTime =  1446921000000;
+var endTime =  1447002000000;
 var totalTime = endTime - startTime;
 
 var eventProgress = function() {
@@ -85,23 +87,77 @@ var {
  
 var more2 = React.createClass({
 
-     getInitialState() {
+     getInitialState: function() {
        return {
         progress: 0
       };
      },
 
-     findImageSize: function() {
+     doConnect: function(){
+      RCTRealtimeMessaging.RTEventListener("onConnected",this._onConnected),
+      RCTRealtimeMessaging.RTEventListener("onMessage",this._onMessage),
+      RCTRealtimeMessaging.RTEventListener("onSubscribed",this._onSubscribed),
+      RCTRealtimeMessaging.RTEventListener("onUnSubscribed",this._onUnSubscribed),
+      RCTRealtimeMessaging.RTPushNotificationListener(this._onNotification);
+      RCTRealtimeMessaging.RTEventListener("onDisconnect", function(){
+          console.log('Disconnected from Realtime Messaging');
+      }),
+      RCTRealtimeMessaging.RTConnect(
+       {
+       appKey:"iVQKdc",
+       token:'3afxcv4ymzzsfmovdon22kmh',
+       channel:'my_channel',
+       connectionMetadata:'push',
+       clusterUrl:'http://ortc-developers.realtime.co/server/2.1/',
+       projectId:'1062207264664'
+       });
+     },
+
+     _onMessage: function() {
+        console.log("got message");
+     },
+
+     componentDidMount: function() {
+        this.doConnect();
+     },
+
+     _onNotification: function(data)
+    {
+       console.log("Received notification: " + JSON.stringify(data));  
+    },
+
+    _onUnSubscribed: function(unSubscribedEvent)
+    {
+      console.log("unsubscribed channel " + unSubscribedEvent.channel);
+    },
+
+    _onSubscribed: function(subscribedEvent)
+  {
+    console.log("subscribed channel " + subscribedEvent.channel);
+  },
+
+      _onConnected: function()
+    {
+      RCTRealtimeMessaging.RTSubscribeWithNotifications("my_channel", true);
+      console.log("connected");
+    },
+
+    findImageSize: function() {
       var image;
-        if (Screen.width < 350) {
-          image = require('image!sponsorssmall');
+        if (Screen.width >= 400) {
+          image = require('image!sponsorsnewlarge');
+          return image;
+        }
+        else if (Screen.width > 350 && Screen.width < 400){
+          image = require('image!sponsorsnewmedium');
           return image;
         }
         else {
-          image = require('image!sponsorslarge');
+          image = require('image!sponsorsnewsmall');
           return image;
         }
      },
+
 
      render: function() {
 
@@ -171,7 +227,7 @@ var styles = StyleSheet.create({
       fontSize: 10*Screen.height/320
   },
   timeText: {
-      paddingTop: 10,
+      marginTop: 10,
       fontFamily: 'futura',
       color: '#FFFFFF',
       fontSize: 10*Screen.height/320,

@@ -34,16 +34,16 @@ var styles = StyleSheet.create({
 
 var findIcon = function(name) {
   if (name.name == 'home') {
-    var source = require('image!home');
+    var source = require('image!grayhome');
   }
   if (name.name == 'infowithcircle') {
-    var source = require('image!infowithcircle');
+    var source = require('image!grayinfowithcircle');
   }
   if (name.name == 'location') {
-    var source = require('image!location');
+    var source = require('image!graylocation');
   }
   if (name.name == 'calendar') {
-    var source = require('image!calendar');
+    var source = require('image!graycalendar');
   }
   return source;
 }
@@ -63,9 +63,9 @@ var CustomTabBar = React.createClass({
     var source;
     return (
       <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={[styles.tab]}>
-        <Image source={findIcon({name})} size={30} style={{width: 30, height: 30, position: 'absolute', top: 0, left: deviceWidth/13}}
+        <Image source={findIcon({name})} size={30} style={{width: 30, height: 30, position: 'absolute', top: 1, left: deviceWidth/13}}
               ref={(icon) => { this.selectedTabIcons[page] = icon }}/>
-        <Image source={findIcon({name})} size={30} style={{width: 30, height: 30, position: 'absolute', top: 0, left: deviceWidth/13}}
+        <Image source={findIcon({name})} size={30} style={{width: 30, height: 30, position: 'absolute', top: 1, left: deviceWidth/13}}
               ref={(icon) => { this.unselectedTabIcons[page] = icon }}/>
       </TouchableOpacity>
     );

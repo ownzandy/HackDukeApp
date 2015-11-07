@@ -93,12 +93,16 @@ var more2 = React.createClass({
 
      findImageSize: function() {
       var image;
-        if (Screen.width < 350) {
-          image = require('image!sponsorssmall');
+        if (Screen.width > 400) {
+          image = require('image!sponsorslarge');
+          return image;
+        }
+        else if (Screen.width > 350 && Screen.width < 400){
+          image = require('image!sponsorsmedium');
           return image;
         }
         else {
-          image = require('image!sponsorslarge');
+          image = require('image!sponsorssmall');
           return image;
         }
      },

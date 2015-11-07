@@ -22,15 +22,19 @@ var more4 = React.createClass({
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
     }),
     dataBlob = {
-      'Saturday, November 7*12:00-2:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '2:00-4:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '4:00-6:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '6:00-8:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '8:00-10:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '10:00-12:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '1:00-3:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '5:00-4:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}],
-      '2:00-1:00':[{'time':'12:45','name':'Example Name', 'place':'Teer Building'}, {'time':'1:00','name':'Party', 'place':'Hudson Building'}]
+      'Saturday, November 7*9:00-12:00 AM':[{'time':'10:00-10:00','name':'Check-In Begins', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}, {'time':'11:00-12:00','name':'Lunch and Mingle', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}],
+      '12:00-3:00 PM':[ {'time':'12:30-1:30','name':'Opening Ceremony', 'place':'Bryan Center, Reynolds Auditorium'},
+                        {'time':'1:30-1:30','name':'Hacking Begins!', 'place':'FCIEMAS'},
+                       {'time':'1:30-2:30','name':'Education Talks', 'place':'Floor 1 Schiciano Auditorium A'},
+                       {'time':'1:30-2:30','name':'Inequality Talks', 'place':'Floor 1 Schiciano Auditorium B'},
+                       {'time':'1:30-2:30','name':'Energy and Environment Talks', 'place':'Hudson Building 125'},
+                       {'time':'1:30-2:30','name':'Health and Wellness Talks', 'place':'Teer Building 203'}],
+      '3:00-6:00 PM':[{'time':'4:00-4:00','name':'DiVE Tours Begin', 'place':'FCIEMAS Floor 1'}],
+      '6:00-9:00 PM':[{'time':'6:00-7:30','name':'Dinner and Talks', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}, {'time':'6:30-6:30','name':'DiVE Tours End', 'place':'FCIEMAS Floor 1'}, {'time':'8:00-9:00','name':'Ladies Dessert Meetup', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}],
+      '9:00-12:00 PM':[{'time':'10:00-11:00','name':'Cat Cookie Decoration', 'place':'Engineering Quad'}, {'time':'11:00-12:00','name':'Nerf Gun War', 'place':'FCIEMAS Basement'}],
+      'Sunday, November 8*12:00-12:00 AM':[{'time':'12:00-1:00','name':'Midnight Snack', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}, {'time':'9:00-10:00','name':'Breakfast', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}],
+      ' 12:00-3:00 PM':[{'time':'12:00-12:00','name':'Hacking Ends!', 'place':'FCIEMAS'},{'time':'12:00-3:00','name':'Lunch', 'place':'FCIEMAS Floor 1 Schiciano Entrance'}, {'time':'12:30-1:30','name':'Hack Expo Part 1', 'place':'FCIEMAS'}, {'time':'2:00-3:00','name':'Hack Expo Part 2', 'place':'FCIEMAS'}],
+      ' 3:00-6:00 PM':[{'time':'4:30-5:30','name':'Closing Ceremony', 'place':'Bryan Center, Reynolds Auditorium'}, {'time':'5:30-5:30','name':'Departure', 'place':'FCIEMAS'}],
     };
 
     return {

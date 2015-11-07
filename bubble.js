@@ -1,9 +1,9 @@
-'use strict';
+ 'use strict';
  
 var React = require('react-native');
 var Screen = require('Dimensions').get('window');
-var Browser = require('react-native-browser');
 var React = require('react-native');
+var Browser = require('react-native-browser');
 var Parse = require('parse/react-native');
 var ParseReact = require('parse-react/react-native');
 Parse.initialize(
@@ -28,7 +28,7 @@ var submitText;
 var more2 = React.createClass({
 
     openBubble: function() {
-        Browser.open('http://bubble12.herokuapp.com/', {
+         Browser.open('http://bubble12.herokuapp.com/', {
                     showUrlWhileLoading: true,
                     navigationButtonsHidden: false,
                     showActionButton: true,
@@ -103,7 +103,7 @@ var more2 = React.createClass({
             </View>
             <View style={styles.bubble}>
                     <TextInput ref={component => this._textInput = component}
-                    style={styles.textInput} autoCorrect={false}  autoCapitalize={'none'} 
+                    style={styles.textInput} autoCorrect={false}  autoCapitalize={'none'} textAlign={'left'}
                     onChange={(event) => this.updateSubmitText(event)}/>
                 <View style={styles.textInputLine}>
                 </View>
@@ -183,10 +183,10 @@ var styles = StyleSheet.create({
     color: '#FFFFFF',
     borderColor: '#FFFFFF',
     borderWidth: 2,
-    paddingLeft: 50,
-    paddingRight: 50,
-    paddingTop: Screen.height/667*10,
-    paddingBottom: Screen.height/667*5,
+    paddingLeft: Screen.height/667*50,
+    paddingRight: Screen.height/667*50,
+    paddingTop: Screen.height/667*3,
+    paddingBottom: Screen.height/667*1,
   },
   container: {
     flex: 1,
@@ -266,7 +266,6 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     backgroundColor: '#03a9f4',
-    paddingBottom: Screen.height/667*30
   },
   textBelowLogo: {
     paddingTop: 10*Screen.height/667,
@@ -309,7 +308,6 @@ var styles = StyleSheet.create({
       width: Screen.width/350*200, 
       color: '#FFFFFF',
       fontFamily: 'avenir',
-      textAlign: 'auto'
    },
    textInputLine: {
     height: 1,

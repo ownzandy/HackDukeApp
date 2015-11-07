@@ -1,13 +1,15 @@
-'use strict';
+ 'use strict';
  
 var React = require('react-native');
 var Screen = require('Dimensions').get('window');
-var Browser = require('react-native-browser');
+var React = require('react-native');
+var Parse = require('parse/react-native');
+var ParseReact = require('parse-react/react-native');
 var WebIntent = require('react-native-webintent');
-
-var openBubble = function() {
-  WebIntent.open('https://bubble12.herokuapp.com')
-}
+Parse.initialize(
+  'gApTA0nc0OCYp0Bn23tgvTCo6Bdk84vPBpKm9CDu',
+  'x6rYbWbGVCTmL3rQZ2nvZNcfHhIc09xKNgUnL8Nm'
+);
 
 var {
   StyleSheet,
@@ -16,11 +18,30 @@ var {
   Component,
   Image,
   ScrollView,
-  TextInput
+  TextInput,
+  TouchableOpacity,
 } = React;
  
-class more2 extends Component {
-  render() {
+var submitText;
+
+var more2 = React.createClass({
+
+    openBubble: function() {
+      WebIntent.open('http://andy-wang.com')
+  },
+
+    updateSubmitText: function(text) {
+      submitText = text;
+    },
+
+    clearText: function() {
+      if (submitText != '') {
+        ParseReact.Mutation.Create('bubble', {email : submitText}).dispatch();
+     }
+      submitText = '';
+    },
+
+  render: function() {
     return (
       <ScrollView
         automaticallyAdjustContentInsets={true}
@@ -38,7 +59,7 @@ class more2 extends Component {
           </Text>
         </View>
         <Image 
-          source={require('image!transmap')} 
+          source={require('image!TransMap')} 
           resizeMode={Image.resizeMode.stretch}
           style={styles.resizeTransMap}/>
         <Text style={styles.belowMapText}>
@@ -47,11 +68,13 @@ class more2 extends Component {
         <Text style={styles.bigUnderText}>
           Run into a bubble to get its message!
         </Text>
+        <View style={styles.startContainer}>
         <Text
-          onPress={() => openBubble()}
+          onPress={() => this.openBubble()}
           style={styles.description}>
           {'Start'}
         </Text>
+        </View>
       </View>
       <View style={styles.downIcon}>
           <Image source={require('image!chevron')}
@@ -69,10 +92,25 @@ class more2 extends Component {
                 a new way to message.
               </Text>
             </View>
+              <View style={styles.bubble}>
+                    <TextInput style={{height: Screen.height/667*50, fontSize: Screen.height/667*20, color: '#FFFFFF', width: Screen.width/350*200}} 
+                onChangeText={(text) => this.updateSubmitText(text)} underlineColorAndroid={'#FFFFFF'} textAlign={'center'} textAlignVertical={'bottom'}/>
+                <TouchableOpacity onPress={this.clearText}>
+                        <Text style={styles.clearText}> Click to submit your email </Text>
+                </TouchableOpacity>
+            </View>
             <Image 
               source={require('image!map')}
               style={styles.resizeMap}
               resizeMode={Image.resizeMode.stretch}/>
+              <View style={styles.textUnderMapContainer}>
+                <Text style={styles.textBelow}>
+                  {'We\'re launching soon!'}
+                </Text>   
+                <Text style={styles.textBelowMap}>
+                  get notified when it goes down
+                </Text>    
+              </View>
             <View style={styles.mapContainer}>
               <View style={styles.textMapContainer}>
                 <Text style={styles.textBelowMap}>
@@ -82,27 +120,16 @@ class more2 extends Component {
                   send it floating off for anyone to pick up
                 </Text> 
                 <Text style={styles.textBelowMap}>
-                  (aka sending a bubble)
-                </Text>
-                <Text style={styles.textBelowMap}>
                   discover bubbles by running into them 
                 </Text>   
-                <Text style={styles.textBelow}>
-                  We're launching soon!
-                </Text>   
-                <Text style={styles.textBelowMap}>
-                  get notified when it goes down
-                </Text> 
               </View>
             </View> 
-        </View> 
-        <View style={styles.bubble}>
-            <Text style={styles.bubbleText}> </Text>
-         </View>                                                                    
+        </View>                                                             
       </ScrollView>
     );
   }
-}
+});
+
 
 var styles = StyleSheet.create({
   chevronImage: {
@@ -118,33 +145,34 @@ var styles = StyleSheet.create({
     backgroundColor: '#2a3139',
   },
   bubble: {
+    paddingBottom: 10*Screen.height/667,
     backgroundColor: '#03a9f4',
-    height: Screen.height/667*30
+    alignItems: 'center'
   },
   header: {
+    height: Screen.height-49,
     alignItems: 'center',
     backgroundColor: '#03a9f4',
     padding: 10,
     borderColor: '#2a3139'
   },
   headerText: {
-    fontFamily: "futura",
+    fontFamily: "avenir",
     textAlign: 'center',
     fontSize: 25,
     color: '#FFFFFF',
   },
   description: {
     fontSize: Screen.height*1/25,
-    marginTop: Screen.height*1/90,
     textAlign: 'center',
     fontFamily: 'futura',
     color: '#FFFFFF',
     borderColor: '#FFFFFF',
-    borderWidth: 2.5,
-    paddingLeft: 50,
-    paddingRight: 50,
-    paddingTop: Screen.height/667*5,
-    paddingBottom: Screen.height/667*5,
+    borderWidth: 2,
+    paddingLeft: Screen.height/667*50,
+    paddingRight: Screen.height/667*50,
+    paddingTop: Screen.height/667*1,
+    paddingBottom: Screen.height/667*1,
   },
   container: {
     flex: 1,
@@ -183,7 +211,7 @@ var styles = StyleSheet.create({
     fontSize: Screen.height*1/35,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'futura',
+    fontFamily: 'avenir',
   },
   belowMapText: {
     fontSize: Screen.height*1/35,
@@ -194,8 +222,8 @@ var styles = StyleSheet.create({
   },
   bigUnderText: {
     fontSize: Screen.height*1/35,
-    paddingTop: 20*Screen.height/667,
-    paddingBottom: 5*Screen.height/667,
+    paddingTop: 10*Screen.height/667,
+    paddingBottom: 10*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
     fontFamily: 'futura',
@@ -211,13 +239,11 @@ var styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
   },
   mapContainer: {
-    paddingTop: 30*Screen.height/667,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#03a9f4',
   },
   textContainer: {
-    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#03a9f4',
@@ -228,28 +254,29 @@ var styles = StyleSheet.create({
     backgroundColor: '#03a9f4',
   },
   textBelowLogo: {
+    paddingTop: 10*Screen.height/667,
     fontSize: 30*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'futura',
+    fontFamily: 'avenir',
   },
   textBelow: {
-    fontSize: 28*Screen.height/667,
-    marginTop: 30*Screen.height/667,
+    fontSize: 25*Screen.height/667,
+    marginTop: 10*Screen.height/667,
     textAlign: 'center',
     color: '#FFFFFF',
-    fontFamily: 'futura',
+    fontFamily: 'avenir',
   },
   textBelowMap: {
     flex: 1,
-    fontSize: 18*Screen.height/667,
+    fontSize: 15*Screen.height/667,
     textAlign: 'left',
     color: '#FFFFFF',
-    fontFamily: 'futura',
+    fontFamily: 'avenir',
   },
   resizeMap: {
-    width: 310*Screen.height/667,
-    height: 200*Screen.height/667,
+    width: 225*Screen.height/667,
+    height: 150*Screen.height/667,
   },
   resizeLogo: {
     width: 145*Screen.height/667,
@@ -261,6 +288,29 @@ var styles = StyleSheet.create({
   resizeTransMap: {
     height: 323*Screen.height/667,
     width: 200*Screen.height/667
+  },
+   textInput: {
+      height: Screen.height/667*25, 
+      width: Screen.width/350*200, 
+      color: '#FFFFFF',
+      fontFamily: 'avenir',
+   },
+   textInputLine: {
+    height: 1,
+    width: Screen.width*2/3,
+    backgroundColor: '#FFFFFF',
+  },
+  clearText: {
+     color: '#FFFFFF',
+     fontFamily: 'avenir'
+  },
+  textUnderMapContainer: {
+    alignItems: 'center',
+    paddingBottom: Screen.height/667*30
+  },
+  startContainer: {
+    borderColor: '#FFFFFF',
+    borderWidth: 2,
   }
 });
  

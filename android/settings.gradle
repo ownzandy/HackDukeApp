@@ -3,5 +3,8 @@ rootProject.name = 'HackDukeApp'
 include ':RNWebIntent', ':app'
 
 include ':react-native-android-statusbar'
+include ':ReactAndroid'
+include ':react-native-realtime-messaging-android'
+project(':react-native-realtime-messaging-android').projectDir = new File(settingsDir,'../node_modules/react-native-realtimemessaging-android/reactnativemessagingandroid')
 project(':react-native-android-statusbar').projectDir = new File(settingsDir, '../node_modules/react-native-android-statusbar')
 project(':RNWebIntent').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-webintent')
